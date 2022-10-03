@@ -12,22 +12,52 @@
     <div class="container">
         <h1 class="mt-4">Rock, Paper Scissors</h1>
         <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <p id="player_choice">&nbsp;</p>
+                <p id="computer_choice">&nbsp;</p>
+                <p class="text-danger" id="round_result">&nbsp;</p>
+                <p class="text-danger" id="message">&nbsp;</p>
+                <br>
+                <p>Choose rock, paper, or scissors!</p>
+                <br>
+                <button class="btn btn-outline-secondary" onclick="choose(0)">Rock</button>
+                <button class="btn btn-outline-danger" onclick="choose(1)">Paper</button>
+                <button class="btn btn-outline-success" onclick="choose(2)">Scissors</button>
+                <button class="btn btn-info" onclick="getStatistics()">Get Statistics!</button> 
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-danger" role="alert">
+                    <p> Cantidad de veces que gano la computadora: </p>
+                    <p id="computer_wins">&nbsp;</p>
+                </div>
+                <div class="alert alert-success" role="alert">
+                    <p> Cantidad de veces que gano el jugador: </p>
+                    <p id="player_wins">&nbsp;</p>
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <p> Cantidad de veces que empataron: </p>
+                    <p id="draws">&nbsp;</p>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input class="form-control" placeholder="Elegi un numero del 1 al 100:" type="number" id="numbersapi" name="numbersapi"
+                    min="1" max="100">
+                    <br>
 
-        <p id="player_choice">&nbsp;</p>
-        <p id="computer_choice">&nbsp;</p>
-        <p class="text-danger" id="round_result">&nbsp;</p>
-        <p class="text-danger" id="message">&nbsp;</p>
-        <hr>
-        <p>Choose rock, paper, or scissors!</p>
-        <br>
-        <br>
-
-        <button class="btn btn-outline-secondary" onclick="choose(0)">Rock</button>
-        <button class="btn btn-outline-danger" onclick="choose(1)">Paper</button>
-        <button class="btn btn-outline-success" onclick="choose(2)">Scissors</button>
+                <button class="btn btn-outline-success" onclick="getRandomData()">Buscar dato random</button>
+                <br>
+                <p class="text-info" id="random_message">&nbsp;</p>
+                
+            </div>
+        </div>  
     </div>
 </body>
 <script>
+
     function choose(x){
         fetch("/play?c=" + x)
         .then(response => response.json())
@@ -45,7 +75,23 @@
             document.getElementById("round_result").innerHTML = data.round_result;
             document.getElementById("message").innerHTML = data.message;
         })
-
+    }
+    function getStatistics(){
+        fetch("/getStatistics")
+        .then(response => response.json())
+        .then(data =>{
+            document.getElementById("computer_wins").innerHTML = data.computer_wins;
+            document.getElementById("player_wins").innerHTML = data.player_wins;
+            document.getElementById("draws").innerHTML = data.draws;
+        })
+    }
+    function getRandomData(){
+        var number = document.getElementById("numbersapi").value;
+        fetch("/getRandomData?number=" + number)
+        .then(response => response.json())
+        .then(data =>{
+            document.getElementById("random_message").innerHTML = data.random_message;
+        })
     }
 </script>
 </html>
