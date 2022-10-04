@@ -42,13 +42,16 @@
                 <hr>
             </div>
         </div>
+        
+        <h1 class="mt-2">NumbersAPI: random data</h1>
+        <hr>
         <div class="row">
             <div class="col-md-4">
-                <input class="form-control" placeholder="Elegi un numero del 1 al 100:" type="number" id="numbersapi" name="numbersapi"
-                    min="1" max="100">
+                <input class="form-control" placeholder="Elegi un numero del 1 al 5000:" type="number" id="numbersapi" name="numbersapi"
+                    min="1" max="5000">
                     <br>
 
-                <button class="btn btn-outline-success" onclick="getRandomData()">Buscar dato random</button>
+                <button class="btn btn-outline-success" onclick="getRandomData(1)">Search for random data.</button>
                 <br>
                 <p class="text-info" id="random_message">&nbsp;</p>
                 
@@ -63,13 +66,13 @@
         .then(response => response.json())
         .then(data =>{
             if (x == 0){
-                document.getElementById("player_choice").innerHTML = "Player chose rock";
+                document.getElementById("player_choice").innerHTML = "Player chose ROCK";
             } 
             if (x == 1){
-                document.getElementById("player_choice").innerHTML = "Player chose paper";
+                document.getElementById("player_choice").innerHTML = "Player chose PAPER";
             } 
             if (x == 2){
-                document.getElementById("player_choice").innerHTML = "Player chose scissors";
+                document.getElementById("player_choice").innerHTML = "Player chose SCISSORS";
             } 
             document.getElementById("computer_choice").innerHTML = data.computer_choice;
             document.getElementById("round_result").innerHTML = data.round_result;

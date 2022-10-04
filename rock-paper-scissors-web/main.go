@@ -90,10 +90,6 @@ func getRandomData(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 			return
 		}
-		if err != nil {
-			log.Println(err)
-			return
-		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(out)
 	}
