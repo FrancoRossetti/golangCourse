@@ -41,7 +41,7 @@ type Summary struct {
 	MessageResult string `json:"message"`
 }
 
-func PlayRound(s Summary, playerValue int) (Round, Summary) {
+func PlayRound(s *Summary, playerValue int) Round {
 	rand.Seed(time.Now().UnixNano())
 
 	computerValue := rand.Intn(3)
@@ -89,5 +89,5 @@ func PlayRound(s Summary, playerValue int) (Round, Summary) {
 	result.RoundResult = RoundResults[winner]
 	result.Winner = winner
 
-	return result, s
+	return result
 }

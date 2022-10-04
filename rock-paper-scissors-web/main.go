@@ -27,8 +27,7 @@ type RandomData struct {
 
 func playRound(w http.ResponseWriter, r *http.Request) {
 	playerChoice, _ := strconv.Atoi(r.URL.Query().Get("c"))
-	result, summary := rps.PlayRound(sum, playerChoice)
-	sum = summary
+	result := rps.PlayRound(&sum, playerChoice)
 	out, err := json.MarshalIndent(result, "", "   ")
 	if err != nil {
 		log.Println(err)
